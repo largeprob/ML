@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+ 
+
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\LargeProb.Core\LargeProb.Core.csproj" />
+    <ProjectReference Include="..\LargeProb.ML.Application.Contracts\LargeProb.ML.Application.Contracts.csproj" />
+    <ProjectReference Include="..\LargeProb.ML.Application\LargeProb.ML.Application.csproj" />
+  </ItemGroup>
+
+ 
+
+ 
+  <ItemGroup>
+    <None Update="openh264-1.8.0-win64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SimHei.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+	
+
+</Project>

@@ -1,0 +1,6 @@
+{
+  "OSS": {
+    "IMAGE_MAX_SIZE": 5242880,
+    "File_MAX_SIZE": 52428800
+  }
+}

@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OnnxRuntimeType>CPU</OnnxRuntimeType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
+		
+		<PackageReference Include="Microsoft.ML.ImageAnalytics" Version="4.0.2" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.22.2" />
+		<PackageReference Include="Microsoft.ML.OnnxTransformer" Version="4.0.2" />
+		<PackageReference Include="OpenCvSharp4" Version="4.11.0.20250507" />
+
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
+		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.7" />
+	</ItemGroup>
+
+	<!--当要使用GPU版本的ONNX Runtime时，请在项目文件中设置OnnxRuntimeType属性为GPU。-->
+	<!--注意1：如果使用GPU版本的ONNX Runtime，确保安装了CUDA和cuDNN，并且正确配置了环境变量。-->
+	<!--注意1：如果使用GPU版本的ONNX Runtime，确保Microsoft.ML.OnnxRuntime包不能被安装，否则默认使用CPU版本。-->
+	<ItemGroup Condition="'$(OnnxRuntimeType)' == 'CPU'">
+		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.22.1" />
+	</ItemGroup>
+
+	<!--针对GPU版本的ONNX Runtime-->
+	<ItemGroup Condition="'$(OnnxRuntimeType)' == 'GPU'">
+		<PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.22.0" />
+	</ItemGroup>
+
+	<!--针对Linux下的OpenCV和ONNX Runtime GPU版本的引用-->
+	<ItemGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+		<PackageReference Include="TorchSharp-cuda-linux" Version="0.105.0" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu.Linux" Version="1.22.0" />
+		<PackageReference Include="OpenCvSharp4.official.runtime.linux-x64" Version="4.11.0.20250507" />
+		<PackageReference Include="OpenCvSharp4.runtime.linux-x64 " Version="4.10.0.20240717" />
+	</ItemGroup>
+	
+	<!--针对Windows下的OpenCV和ONNX Runtime GPU版本的引用-->
+	<ItemGroup Condition="'$(RuntimeIdentifier)' != 'linux-x64'">
+		<PackageReference Include="TorchSharp-cuda-windows" Version="0.105.1" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu.Windows" Version="1.22.1" />
+		<PackageReference Include="OpenCvSharp4.runtime.win" Version="4.11.0.20250507" />
+		<PackageReference Include="OpenCvSharp4.Windows" Version="4.11.0.20250507" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\LargeProb.Core\LargeProb.Core.csproj" />
+	  <ProjectReference Include="..\LargeProb.ML.Application.Contracts\LargeProb.ML.Application.Contracts.csproj" />
+	</ItemGroup>
+</Project>

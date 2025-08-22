@@ -1,0 +1,7 @@
+{
+  "Cors": {
+    "Mg": [
+      "http://localhost:3002"
+    ]
+  }
+}
